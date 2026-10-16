@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>동신대학교 교수학습지원센터(CTL) - 학생이 행복한 스마트 배움 포털</title>
+  
+  <!-- SEO 및 메타 태그 -->
+  <meta name="description" content="동신대학교 교수학습센터(CTL) 공식 스마트 앱. 러닝파트너, 생성형 AI 워크숍, 1:1 MLST 학습컨설팅, 비교과 드림마일리지 장학 혜택까지 한 손에!">
+  <meta name="keywords" content="동신대학교, 동신대, 교수학습지원센터, CTL, 러닝파트너, 드림마일리지, 대학생 스터디, 학습컨설팅, AI워크숍">
+  <meta name="author" content="동신대학교 교수학습지원센터">
+  <meta property="og:title" content="동신대학교 교수학습센터 스마트 앱">
+  <meta property="og:description" content="배움의 날개를 달다! 동신대 CTL 프로그램 신청 및 마일리지 장학 포털">
+  <meta property="og:image" content="assets/hero_banner.jpg">
+  <meta name="theme-color" content="#002b66">
+
+  <!-- 웹폰트 (Pretendard & Outfit) -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- 스타일시트 -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="mode-phone">
+
+  <!-- [1] 상단 디바이스 컨트롤 바 (데스크톱/프레젠테이션용 뷰 스위처) -->
+  <aside class="device-control-bar" aria-label="기기 미리보기 제어 바">
+    <div class="brand-badge">
+      <span class="dot"></span>
+      <span>동신대학교 CTL 모바일 앱 미리보기</span>
+      <span style="font-size:0.75rem; opacity:0.7;">v2.6</span>
+    </div>
+
+    <div class="device-control-actions">
+      <div class="view-toggle-group">
+        <button type="button" class="view-btn active" id="btn-mode-phone" title="모바일 스마트폰 뷰">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+          모바일 앱
+        </button>
+        <button type="button" class="view-btn" id="btn-mode-web" title="와이드 웹 대시보드 뷰">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          와이드 웹
+        </button>
+      </div>
+
+      <button type="button" class="theme-toggle-btn" id="btn-theme-toggle" title="다크모드/라이트모드 토글">
+        <svg id="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      </button>
+
+      <button type="button" class="refresh-btn" id="btn-reset-data" title="체험 데이터 초기화">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- [2] 메인 앱 래퍼 -->
+  <div class="main-wrapper">
+    <div class="app-container" id="app-container">
+
+      <!-- 스마트폰 상태바 & 다이내믹 아일랜드 (모바일 모드) -->
+      <div class="phone-notch-area">
+        <div class="phone-status-bar">
+          <span id="live-phone-time">14:45</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.28 19.59 10.59 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9z"></path></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"></rect><line x1="20" y1="11" x2="20" y2="13" stroke="currentColor" stroke-width="2"></line></svg>
+          </div>
+        </div>
+        <div class="phone-notch">
+          <span class="notch-sensor"></span>
+          <span class="notch-camera"></span>
+        </div>
+      </div>
+
+      <!-- 상단 앱 네비게이션 헤더 -->
+      <header class="app-header">
+        <div class="header-brand" id="header-brand-logo" title="홈으로 이동">
+          <div class="brand-emblem">D</div>
+          <div class="brand-titles">
+            <span class="brand-univ">동신대학교 DONGSHIN UNIV</span>
+            <span class="brand-dept">교수학습지원센터 <span style="color:var(--dsu-blue); font-size:0.85em; font-weight:900;">CTL</span></span>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button type="button" class="header-icon-btn" id="btn-open-bookmarks" title="찜한 프로그램 목록">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+          </button>
+          <button type="button" class="header-icon-btn" id="btn-open-notices" title="알림 센터">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            <span class="icon-badge" id="notice-badge-count">2</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- 스크롤 가능 메인 탭 콘텐츠 -->
+      <main class="app-content" id="app-content">
+
+        <!-- ========================================== -->
+        <!-- [TAB 1] 홈 (Home) -->
+        <!-- ========================================== -->
+        <section class="tab-pane active" id="pane-home">
+          <!-- 사용자 환영 & 마일리지 현황 카드 -->
+          <div class="user-status-card">
+            <div class="user-status-left">
+              <img src="assets/mascot.jpg" alt="프로필" class="user-avatar">
+              <div class="user-info-text">
+                <div class="greeting">학생이 행복한 대학 🎓</div>
+                <div class="name">김동신 <span style="font-size:0.75rem; font-weight:600; color:var(--text-muted);">(컴퓨터공학 2)</span></div>
+              </div>
+            </div>
+            <div class="user-mileage-pill" id="quick-to-mileage" title="마이마일리지 바로가기">
+              <span>🌟</span>
+              <span id="user-display-points">450</span>P
+            </div>
+          </div>
+
+          <!-- 히어로 이미지 슬라이더 배너 -->
+          <div class="hero-slider-wrap">
+            <div class="hero-slider" id="hero-slider">
+              <!-- 슬라이드 1: 러닝파트너 -->
+              <div class="hero-slide" data-program-id="prog-01">
+                <img src="assets/hero_banner.jpg" alt="러닝파트너 24기">
+                <div class="hero-slide-overlay">
+                  <span class="hero-tag">🔥 2026-1학기 대모집</span>
+                  <h3 class="hero-title">러닝파트너 24기 스터디</h3>
+                  <p class="hero-desc">팀당 최대 50만원 지원 + 우수팀 장학금</p>
+                </div>
+              </div>
+              <!-- 슬라이드 2: AI 워크숍 -->
+              <div class="hero-slide" data-program-id="prog-02">
+                <img src="assets/reward_banner.jpg" alt="생성형 AI 워크숍">
+                <div class="hero-slide-overlay">
+                  <span class="hero-tag" style="background:#f59e0b; color:#0f172a;">AI 혁신 특강</span>
+                  <h3 class="hero-title">생성형 AI 학업 마스터</h3>
+                  <p class="hero-desc">ChatGPT & Claude로 과제 리포트 A+ 완성</p>
+                </div>
+              </div>
+              <!-- 슬라이드 3: 1:1 학습컨설팅 -->
+              <div class="hero-slide" data-program-id="prog-03">
+                <img src="assets/mascot.jpg" alt="1:1 맞춤형 컨설팅">
+                <div class="hero-slide-overlay">
+                  <span class="hero-tag" style="background:#10b981; color:#ffffff;">맞춤 처방</span>
+                  <h3 class="hero-title">1:1 MLST 학습컨설팅</h3>
+                  <p class="hero-desc">전문 상담사와 함께 찾는 나만의 진짜 공부법</p>
+                </div>
+              </div>
+            </div>
+            <!-- 인디케이터 점 -->
+            <div class="slider-dots" id="slider-dots">
+              <span class="dot-indicator active" data-index="0"></span>
+              <span class="dot-indicator" data-index="1"></span>
+              <span class="dot-indicator" data-index="2"></span>
+            </div>
+          </div>
+
+          <!-- 4대 퀵 액션 메뉴 -->
+          <div class="quick-action-grid">
+            <div class="quick-btn" id="qa-programs">
+              <div class="quick-icon-box icon-blue">📋</div>
+              <span class="quick-label">프로그램 신청</span>
+            </div>
+            <div class="quick-btn" id="qa-ai-diagnosis">
+              <div class="quick-icon-box icon-cyan">🤖</div>
+              <span class="quick-label">AI 맞춤진단</span>
+            </div>
+            <div class="quick-btn" id="qa-consulting">
+              <div class="quick-icon-box icon-amber">💬</div>
+              <span class="quick-label">1:1 코칭예약</span>
+            </div>
+            <div class="quick-btn" id="qa-mileage">
+              <div class="quick-icon-box icon-green">🎁</div>
+              <span class="quick-label">마일리지 혜택</span>
+            </div>
+          </div>
+
+          <!-- 동신 CTL 성과 지표 스트립 -->
+          <div class="ctl-stats-strip">
+            <div class="stat-item">
+              <span class="stat-val">3,480+</span>
+              <span class="stat-lbl">연간 참여 학생</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-val">1.85억</span>
+              <span class="stat-lbl">지원 장학금(원)</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-val">98.7%</span>
+              <span class="stat-lbl">학생 만족도</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-val">28+</span>
+              <span class="stat-lbl">운영 비교과</span>
+            </div>
+          </div>
+
+          <!-- 실시간 인기 & 마감임박 프로그램 섹션 -->
+          <div class="section-header">
+            <h3 class="section-title">
+              <span>🔥</span> 지금 주목받는 CTL 프로그램
+            </h3>
+            <span class="section-more-link" id="home-view-all-programs">전체보기 &rarr;</span>
+          </div>
+
+          <div class="horizontal-card-deck" id="home-popular-deck">
+            <!-- 자바스크립트로 인기 프로그램 동적 렌더링 -->
+          </div>
+
+          <!-- 생생 우수 참여 후기 섹션 -->
+          <div class="section-header" style="margin-top: 10px;">
+            <h3 class="section-title">
+              <span>🌟</span> 선배들의 생생 성장 후기
+            </h3>
+            <span style="font-size:0.75rem; color:var(--text-muted);">실제 참여자 리뷰</span>
+          </div>
+
+          <div class="reviews-scroller" id="home-reviews-deck">
+            <!-- 자바스크립트로 후기 동적 렌더링 -->
+          </div>
+
+          <!-- 최신 CTL 공지 피드 카드 -->
+          <div class="section-header">
+            <h3 class="section-title">
+              <span>📢</span> 센터 최신 공지사항
+            </h3>
+          </div>
+          <div style="background:var(--bg-card); border:1px solid var(--border-light); border-radius:var(--radius-lg); padding:14px; margin-bottom:20px;" id="home-notice-list">
+            <!-- 동적 공지사항 리스트 -->
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- [TAB 2] 프로그램 (Programs) -->
+        <!-- ========================================== -->
+        <section class="tab-pane" id="pane-programs">
+          <div class="filter-search-box">
+            <div class="search-input-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" class="search-input" id="program-search-input" placeholder="프로그램명, 키워드 검색 (예: AI, 러닝파트너)">
+            </div>
+          </div>
+
+          <!-- 카테고리 필터 칩 -->
+          <div class="category-chips" id="category-chips-list">
+            <button type="button" class="chip-btn active" data-category="all">전체</button>
+            <button type="button" class="chip-btn" data-category="community">학습공동체</button>
+            <button type="button" class="chip-btn" data-category="aitech">AI·에듀테크</button>
+            <button type="button" class="chip-btn" data-category="workshop">학습법·특강</button>
+            <button type="button" class="chip-btn" data-category="consulting">1:1 컨설팅</button>
+            <button type="button" class="chip-btn" data-category="faculty">교수지원</button>
+          </div>
+
+          <!-- 프로그램 카드 리스트 -->
+          <div class="programs-list" id="main-programs-list">
+            <!-- data.js 기반 동적 렌더링 -->
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- [TAB 3] AI 코치 동신이 (AI Study Coach) -->
+        <!-- ========================================== -->
+        <section class="tab-pane" id="pane-ai">
+          <div class="ai-coach-container">
+
+            <!-- 1) 30초 맞춤 학습 프로그램 진단기 카드 -->
+            <div class="ai-diagnosis-card">
+              <!-- 마스코트 소개 카드 -->
+              <div class="mascot-intro-card" style="margin-bottom:16px;">
+                <div class="mascot-avatar-box">
+                  <img src="assets/mascot.jpg" alt="동신이 마스코트">
+                </div>
+                <div class="mascot-intro-text">
+                  <div class="mascot-name">
+                    <span>동신이 AI 학습코치</span>
+                    <span style="font-size:0.7rem; background:var(--dsu-cyan-soft); color:var(--dsu-cyan); padding:2px 8px; border-radius:10px;">스마트 진단</span>
+                  </div>
+                  <p class="mascot-bubble">"안녕! 너의 현재 학년과 공부 고민에 딱 맞는 CTL 프로그램을 30초 만에 추천해줄게!"</p>
+                </div>
+              </div>
+
+              <div class="diagnosis-header">
+                <h4 class="diagnosis-step-title">🎯 나만의 맞춤 CTL 프로그램 찾기</h4>
+                <p class="diagnosis-step-desc">질문에 답변하시면 최적의 학습 로드맵을 설계해 드립니다.</p>
+              </div>
+
+              <div style="margin-bottom:12px;">
+                <label style="font-size:0.78rem; font-weight:700; margin-bottom:6px; display:block;">Q1. 현재 나의 학년은?</label>
+                <div class="diag-options-group" id="diag-q1-group">
+                  <button type="button" class="diag-option-btn selected" data-val="freshman">🌱 1학년 (대학 공부 방식과 적응이 고민이에요)</button>
+                  <button type="button" class="diag-option-btn" data-val="sophomore">🌿 2~3학년 (전공 심화 학점 관리 & 자격증 준비)</button>
+                  <button type="button" class="diag-option-btn" data-val="senior">🌳 4학년 (국가고시/취업 포트폴리오 완성)</button>
+                </div>
+              </div>
+
+              <div style="margin-bottom:16px;">
+                <label style="font-size:0.78rem; font-weight:700; margin-bottom:6px; display:block;">Q2. 지금 가장 필요한 학습 솔루션은?</label>
+                <div class="diag-options-group" id="diag-q2-group">
+                  <button type="button" class="diag-option-btn selected" data-val="studygroup">👥 마음 맞는 친구들과 전공 스터디 & 지원금 받기</button>
+                  <button type="button" class="diag-option-btn" data-val="aitech">⚡ ChatGPT 등 최신 AI 툴로 리포트·과제 퀄리티 극대화</button>
+                  <button type="button" class="diag-option-btn" data-val="strategy">📊 시험 벼락치기 탈출 및 1:1 과학적 공부법 진단</button>
+                  <button type="button" class="diag-option-btn" data-val="tutoring">🧑‍🏫 A+ 선배 튜터에게 1:1로 전공 족보와 과외 받기</button>
+                </div>
+              </div>
+
+              <button type="button" class="diag-submit-btn" id="btn-run-diagnosis">
+                ✨ 30초 AI 맞춤 프로그램 진단하기
+              </button>
+
+              <!-- 진단 결과 영역 -->
+              <div class="diag-result-box" id="diag-result-box">
+                <div class="diag-result-title">
+                  <span>🎉</span>
+                  <span id="diag-result-program-title">추천 프로그램</span>
+                </div>
+                <p class="diag-result-body" id="diag-result-reason">진단 분석 결과 이유...</p>
+                <button type="button" class="btn-detail" id="diag-result-apply-btn" style="width:100%; padding:10px;">
+                  해당 프로그램 자세히 보고 신청하기
+                </button>
+              </div>
+            </div>
+
+            <!-- 2) 24시간 동신이 챗봇 창 -->
+            <div class="chat-window-card">
+              <div class="chat-header">
+                <div class="chat-title-group">
+                  <span class="chat-online-indicator"></span>
+                  <span style="font-weight:800; font-size:0.9rem;">동신이 24시간 스마트 챗봇</span>
+                </div>
+                <span style="font-size:0.72rem; opacity:0.8;">상시 상담 가능</span>
+              </div>
+
+              <div class="chat-messages-area" id="chat-messages-area">
+                <div class="msg-bubble msg-bot">
+                  안녕하세요! 동신대학교 CTL 마스코트 <strong>동신이</strong>예요! 🦅<br>
+                  러닝파트너 신청 조건, 마일리지 장학금 수령법, 스터디룸 예약 등 무엇이든 물어보세요!
+                </div>
+              </div>
+
+              <!-- 빠른 추천 질문 칩 -->
+              <div class="quick-reply-chips">
+                <span class="reply-chip" data-query="러닝파트너 어떻게 신청해?">러닝파트너 신청법</span>
+                <span class="reply-chip" data-query="마일리지 장학금 얼마야?">마일리지 장학 혜택</span>
+                <span class="reply-chip" data-query="1:1 상담 예약 방법">1:1 학습상담 예약</span>
+                <span class="reply-chip" data-query="교수학습센터 위치가 어디야?">센터 위치 및 운영시간</span>
+              </div>
+
+              <!-- 메시지 입력 필드 -->
+              <div class="chat-input-row">
+                <input type="text" class="chat-input" id="chat-input-field" placeholder="동신이에게 질문해보세요...">
+                <button type="button" class="chat-send-btn" id="btn-chat-send" title="전송">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- [TAB 4] 마이 마일리지 (Dream Mileage) -->
+        <!-- ========================================== -->
+        <section class="tab-pane" id="pane-mileage">
+          <!-- 마일리지 현황 대시보드 카드 -->
+          <div class="mileage-overview-card">
+            <div class="mileage-card-top">
+              <span style="font-size:0.82rem; font-weight:700; opacity:0.9;">동신대 비교과 드림 마일리지</span>
+              <div class="mileage-rank-badge">
+                <span>🏃‍♂️</span> 골드 러너 등급
+              </div>
+            </div>
+
+            <div class="mileage-points-big">
+              <span id="tab-mileage-number">450</span> <span style="font-size:1.2rem; font-weight:700; color:#ffffff;">P</span>
+            </div>
+
+            <div class="mileage-tier-info">
+              다음 등급(플래티넘 마스터) 및 상위 장학금까지 <strong>50P</strong> 남았습니다!
+            </div>
+
+            <div class="tier-progress-track">
+              <div class="tier-progress-fill" id="mileage-tier-progress" style="width: 75%;"></div>
+            </div>
+          </div>
+
+          <!-- 데일리 출석 & 퀴즈 미션 카드 -->
+          <div class="daily-mission-card">
+            <div class="section-header" style="margin-bottom:8px;">
+              <h4 class="section-title" style="font-size:1rem;">
+                <span>🎁</span> 오늘의 데일리 배움 퀴즈 (+20P)
+              </h4>
+              <span id="quiz-status-badge" style="font-size:0.75rem; color:var(--dsu-green); font-weight:700;">도전 가능</span>
+            </div>
+            <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:10px;">
+              동신대 CTL 상식 퀴즈를 맞히고 매일 드림 마일리지를 즉시 적립하세요!
+            </p>
+
+            <div class="quiz-box" id="quiz-container">
+              <div class="quiz-question" id="quiz-question-text">
+                동신대학교 교수학습지원센터(CTL)가 위치한 장소는 어디일까요?
+              </div>
+              <div class="quiz-answers-grid" id="quiz-answers-grid">
+                <!-- 동적 퀴즈 선택지 -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 마일리지 교환소 (리워드 & 장학금) -->
+          <div class="section-header">
+            <h3 class="section-title">
+              <span>🛍️</span> 마일리지 리워드 교환소
+            </h3>
+            <span style="font-size:0.74rem; color:var(--text-muted);">즉시 교환 가능</span>
+          </div>
+
+          <div class="rewards-grid">
+            <div class="reward-card">
+              <div class="reward-icon">☕</div>
+              <div class="reward-name">동신대 카페드림 5,000원권</div>
+              <div class="reward-points">150 P</div>
+              <button type="button" class="reward-exchange-btn" data-cost="150" data-name="카페드림 5,000원권">교환 신청</button>
+            </div>
+
+            <div class="reward-card">
+              <div class="reward-icon">👕</div>
+              <div class="reward-name">동신대 시그니처 후드티 교환권</div>
+              <div class="reward-points">300 P</div>
+              <button type="button" class="reward-exchange-btn" data-cost="300" data-name="동신대 시그니처 후드티">교환 신청</button>
+            </div>
+
+            <div class="reward-card">
+              <div class="reward-icon">🎒</div>
+              <div class="reward-name">CTL 한정판 스마트 웰컴 패키지</div>
+              <div class="reward-points">200 P</div>
+              <button type="button" class="reward-exchange-btn" data-cost="200" data-name="스마트 웰컴 패키지">교환 신청</button>
+            </div>
+
+            <div class="reward-card">
+              <div class="reward-icon">🏆</div>
+              <div class="reward-name">학기말 비교과 성취 장학금 응모</div>
+              <div class="reward-points">500 P</div>
+              <button type="button" class="reward-exchange-btn" data-cost="500" data-name="비교과 성취 장학금 응모">장학금 신청</button>
+            </div>
+          </div>
+
+          <!-- 나의 프로그램 신청 이력 -->
+          <div class="section-header">
+            <h3 class="section-title">
+              <span>📑</span> 나의 CTL 프로그램 신청 내역
+            </h3>
+          </div>
+          <div id="my-applied-programs-list" style="display:flex; flex-direction:column; gap:10px;">
+            <!-- 동적 내역 -->
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- [TAB 5] 센터소개 & 공간안내 (About & Space) -->
+        <!-- ========================================== -->
+        <section class="tab-pane" id="pane-about">
+          <!-- 비전 배너 -->
+          <div class="about-banner">
+            <h2>동신대학교 교수학습지원센터</h2>
+            <p>
+              "학생이 행복한 대학, 혁신적 스마트 교육 생태계의 중심"<br>
+              교수자의 열정적인 티칭과 학생의 자기주도적 러닝을 융합하여 미래 사회를 선도할 창의적 인재를 육성합니다.
+            </p>
+          </div>
+
+          <!-- 시설 및 학습 공간 안내 -->
+          <div class="section-header">
+            <h3 class="section-title">
+              <span>🏢</span> CTL 특화 학습 공간 & 스튜디오
+            </h3>
+            <span style="font-size:0.75rem; color:var(--dsu-blue); font-weight:700;">재학생 무료 이용</span>
+          </div>
+
+          <div class="facility-card-list" id="facilities-list">
+            <!-- data.js 기반 렌더링 -->
+          </div>
+
+          <!-- 오시는 길 및 운영 정보 -->
+          <div class="section-header">
+            <h3 class="section-title">
+              <span>📍</span> 찾아오시는 길 & 연락처
+            </h3>
+          </div>
+
+          <div class="contact-info-box">
+            <div class="contact-row">
+              <strong>위치</strong>
+              <span>전남 나주시 건재로 235 동신대학교 중앙도서관 2층</span>
+            </div>
+            <div class="contact-row">
+              <strong>전화</strong>
+              <span><a href="tel:061-330-3114" style="color:var(--dsu-blue); text-decoration:none; font-weight:700;">061-330-3114</a> (내선 3841~3)</span>
+            </div>
+            <div class="contact-row">
+              <strong>이메일</strong>
+              <span>ctl@dsu.ac.kr</span>
+            </div>
+            <div class="contact-row">
+              <strong>이용시간</strong>
+              <span>평일 09:00 ~ 18:00 (점심시간 12:00 ~ 13:00)</span>
+            </div>
+            <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--border-light); display:flex; gap:8px;">
+              <a href="https://www.dsu.ac.kr" target="_blank" rel="noopener" class="btn-detail" style="flex:1; text-align:center; text-decoration:none; padding:9px; background:var(--bg-card-subtle); color:var(--text-main); border:1px solid var(--border-medium);">
+                동신대 대표홈
+              </a>
+              <button type="button" class="btn-detail" id="btn-quick-inquiry" style="flex:1; text-align:center; padding:9px;">
+                1:1 빠른 문의
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- [3] 하단 앱 탭 바 (Bottom Navigation Bar) -->
+      <nav class="app-bottom-nav" aria-label="메인 탭 네비게이션">
+        <button type="button" class="nav-tab-item active" data-target="pane-home">
+          <svg class="nav-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          <span class="nav-tab-label">홈</span>
+        </button>
+
+        <button type="button" class="nav-tab-item" data-target="pane-programs">
+          <svg class="nav-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          <span class="nav-tab-label">프로그램</span>
+        </button>
+
+        <button type="button" class="nav-tab-item" data-target="pane-ai">
+          <svg class="nav-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"></path><rect x="4" y="8" width="16" height="12" rx="4"></rect><circle cx="9" cy="14" r="1.5"></circle><circle cx="15" cy="14" r="1.5"></circle></svg>
+          <span class="nav-tab-label">AI코치</span>
+        </button>
+
+        <button type="button" class="nav-tab-item" data-target="pane-mileage">
+          <svg class="nav-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+          <span class="nav-tab-label">마일리지</span>
+        </button>
+
+        <button type="button" class="nav-tab-item" data-target="pane-about">
+          <svg class="nav-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          <span class="nav-tab-label">센터안내</span>
+        </button>
+      </nav>
+
+      <!-- [4] 바텀시트 모달 (프로그램 상세 & 신청 / 공간 예약 / 공지 팝업) -->
+      <div class="modal-overlay" id="common-modal">
+        <div class="modal-sheet">
+          <div class="modal-sheet-header">
+            <h3 class="modal-sheet-title" id="modal-title">상세 정보</h3>
+            <button type="button" class="modal-close-btn" id="btn-close-modal" title="닫기">&times;</button>
+          </div>
+          <div class="modal-sheet-content" id="modal-content">
+            <!-- 동적 폼 / 상세 내용 삽입 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 토스트 메시지 컨테이너 -->
+      <div class="toast-container" id="toast-container"></div>
+
+      <!-- 파티클 컨페티 캔버스 -->
+      <canvas id="confetti-canvas"></canvas>
+
+    </div>
+  </div>
+
+  <!-- 자바스크립트 로직 -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
